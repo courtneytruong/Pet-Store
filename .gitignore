@@ -1,0 +1,8 @@
+### DotnetCore ###
+# .Net Core build folders
+bin/
+obj/
+
+# Common node modules locations
+/node_modules
+/wwwrooot/node_modules
