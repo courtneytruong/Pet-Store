@@ -6,18 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Pet_Store_class_exercise
+namespace PetStore
 {
-    public class ProductLogic
+    public class ProductLogic : IProductLogic
     {
         /// creates dictionaries for products
-        private List<Product> _products;
+        private List<Product> _products = new List<Product>();
         private Dictionary<string, DogLeash> dogDictionary = new Dictionary<string, DogLeash>();
         private Dictionary<string, CatFood> catDictionary = new Dictionary<string, CatFood>();
 
         public ProductLogic()
         {
             _products = new List<Product>();
+            _products.Add(new Product { Name = "Friskies", Price = (decimal)10.00, Quantity = 0, Description = "Healthy Weight" });
+            _products.Add(new Product { Name = "Royal Canin", Price = (decimal)15.00, Quantity = 5, Description = "Digestive Health" });
+            _products.Add(new Product { Name = "Meow Mix", Price = (decimal)8.00, Quantity = 2, Description = "Meaty Bits" });
         }
         public void AddProduct(Product product) ///add products to dictionary
         {
@@ -45,6 +48,11 @@ namespace Pet_Store_class_exercise
             {
                 return null;
             }
+        }
+
+        public List<string> GetOnlyInStockProducts()
+        {
+          return _products.Where(x => x.Quantity > 0).Select(x => x.Name).ToList();
         }
     }
 }
