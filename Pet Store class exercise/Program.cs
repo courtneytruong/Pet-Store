@@ -10,14 +10,14 @@ namespace PetStore
         {
             var productLogic = new ProductLogic();
             ///ask to make new product
-            Console.WriteLine("Press 1 to add a product, press 2 to look up product, press 3 to show instock products");
+            Console.WriteLine("Press 1 to add a product, press 2 to look up product, press 3 to show instock products, press 4 to return total price of inventory");
             Console.WriteLine("Type 'exit' to quit");
             string userInput = Console.ReadLine();
 
             while (userInput.ToLower() != "exit")
             {
                 ///confirm whether to make new product
-                Console.WriteLine("Press 1 to add a product, press 2 to look up product, press 3 to show instock products");
+                Console.WriteLine("Press 1 to add a product, press 2 to look up product, press 3 to show instock products, press 4 to return total price of inventory");
                 Console.WriteLine("Type 'exit' to quit");
                 userInput = Console.ReadLine();
                 if (userInput == "2")
@@ -112,6 +112,10 @@ namespace PetStore
                 if (userInput == "3")
                 {
                     Console.WriteLine(JsonSerializer.Serialize(productLogic.GetOnlyInStockProducts()));
+                }
+                if (userInput == "4")
+                {
+                    Console.WriteLine(productLogic.GetTotalPriceOfInventory());
                 }
             }
         }

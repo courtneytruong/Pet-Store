@@ -10,7 +10,7 @@ namespace PetStore
 {
     public class ProductLogic : IProductLogic
     {
-        /// creates dictionaries for products
+        // creates dictionaries for products
         private List<Product> _products = new List<Product>();
         private Dictionary<string, DogLeash> dogDictionary = new Dictionary<string, DogLeash>();
         private Dictionary<string, CatFood> catDictionary = new Dictionary<string, CatFood>();
@@ -22,7 +22,7 @@ namespace PetStore
             _products.Add(new Product { Name = "Royal Canin", Price = (decimal)15.00, Quantity = 5, Description = "Digestive Health" });
             _products.Add(new Product { Name = "Meow Mix", Price = (decimal)8.00, Quantity = 2, Description = "Meaty Bits" });
         }
-        public void AddProduct(Product product) ///add products to dictionary
+        public void AddProduct(Product product) //add products to dictionary
         {
             if (product is DogLeash)
             {
@@ -34,11 +34,11 @@ namespace PetStore
             }
             _products.Add(product);
         }
-        public List<Product> GetAllProducts() ///retrieves products entered by user
+        public List<Product> GetAllProducts() //retrieves products entered by user
         {
             return _products;
         }
-        public CatFood GetCatFoodByName(string name) /// search for catfood by name
+        public CatFood GetCatFoodByName(string name) // search for catfood by name
         {
             try
             {
@@ -50,9 +50,15 @@ namespace PetStore
             }
         }
 
-        public List<string> GetOnlyInStockProducts()
+        public List<Product> GetOnlyInStockProducts()
         {
-          return _products.Where(x => x.Quantity > 0).Select(x => x.Name).ToList();
+            return ListExtensions.InStock(_products);
+        }
+
+        public decimal GetTotalPriceOfInventory()
+        {
+            return GetOnlyInStockProducts().Select(x => x.Price).Sum();
+            //return GetOnlyInStockProducts().Select(product => ).Sum();
         }
     }
 }
