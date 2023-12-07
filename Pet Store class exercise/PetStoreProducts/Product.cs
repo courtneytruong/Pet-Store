@@ -1,11 +1,12 @@
-﻿using PetStore;
-using System;
+﻿using System;
+using PetStoreUI;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pet_Store_class_exercise;
 
-namespace PetStore
+namespace PetStoreProducts
 {
     public class Product
     {

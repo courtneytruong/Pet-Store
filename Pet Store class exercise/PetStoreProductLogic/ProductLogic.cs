@@ -1,12 +1,13 @@
-﻿using PetStore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pet_Store_class_exercise;
+using PetStoreUI;
+using PetStoreProducts;
 
-
-namespace PetStore
+namespace PetStoreProductLogic
 {
     public class ProductLogic : IProductLogic
     {
@@ -52,13 +53,12 @@ namespace PetStore
 
         public List<Product> GetOnlyInStockProducts()
         {
-            return ListExtensions.InStock(_products);
+            return _products.InStock();
         }
 
         public decimal GetTotalPriceOfInventory()
         {
             return GetOnlyInStockProducts().Select(x => x.Price).Sum();
-            //return GetOnlyInStockProducts().Select(product => ).Sum();
         }
     }
 }
