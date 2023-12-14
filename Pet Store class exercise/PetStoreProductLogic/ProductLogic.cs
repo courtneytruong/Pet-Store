@@ -7,6 +7,8 @@ using Pet_Store_class_exercise;
 using PetStoreUI;
 using PetStoreProducts;
 
+
+
 namespace PetStoreProductLogic
 {
     public class ProductLogic : IProductLogic
@@ -14,7 +16,7 @@ namespace PetStoreProductLogic
         // creates dictionaries for products
         private List<Product> _products = new List<Product>();
         private Dictionary<string, DogLeash> dogDictionary = new Dictionary<string, DogLeash>();
-        private Dictionary<string, CatFood> catDictionary = new Dictionary<string, CatFood>();
+        private Dictionary<string, CatFood> _catDictionary = new Dictionary<string, CatFood>();
 
         public ProductLogic()
         {
@@ -31,9 +33,10 @@ namespace PetStoreProductLogic
             }
             if (product is CatFood)
             {
-                catDictionary.Add(product.Name, product as CatFood);
+                _catDictionary.Add(product.Name, product as CatFood);
             }
             _products.Add(product);
+
         }
         public List<Product> GetAllProducts() //retrieves products entered by user
         {
@@ -43,9 +46,9 @@ namespace PetStoreProductLogic
         {
             try
             {
-                return catDictionary[name];
-            }
-            catch (Exception ex)
+                return _catDictionary[name];
+            } 
+            catch (Exception)
             {
                 return null;
             }
@@ -58,7 +61,7 @@ namespace PetStoreProductLogic
 
         public decimal GetTotalPriceOfInventory()
         {
-            return GetOnlyInStockProducts().Select(x => x.Price).Sum();
+            return GetOnlyInStockProducts().Select(x => x.Price * x.Quantity).Sum();
         }
     }
 }
