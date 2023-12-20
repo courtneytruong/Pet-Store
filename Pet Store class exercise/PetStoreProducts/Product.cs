@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Pet_Store_class_exercise;
+using FluentValidation;
 
 namespace PetStoreProducts
 {

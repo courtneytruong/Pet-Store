@@ -16,7 +16,7 @@ namespace PetStoreProductLogic
 
         public List<Product> GetAllProducts(); //retrieves products entered by user
 
-        public CatFood GetCatFoodByName(string name); // search for catfood by name
+        public T GetProductByName<T>(string name) where T : Product; // search for catfood by name
 
         public List<Product> GetOnlyInStockProducts(); //returns instock products
 

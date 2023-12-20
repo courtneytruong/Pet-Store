@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text.Json;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using PetStoreUI;
 using PetStoreProductLogic;
 using PetStoreProducts;
@@ -32,9 +34,11 @@ namespace Pet_Store_class_exercise
 
                     if (userInput == "1")
                     {
-                        CatFood catFood = new CatFood();
-                        catFood = CatFoodMenuUI.WetCatFoodMenuLogic();
-                        //add product to list
+                        //create wet cat food object using json format
+                        Console.WriteLine("Please add a Cat Food in JSON format");
+                        var userInputAsJson = Console.ReadLine();
+                        var catFood = JsonSerializer.Deserialize<CatFood>(userInputAsJson);
+                        //add product to list                      
                         productLogic.AddProduct(catFood);
                         Console.WriteLine("Product info added " + JsonSerializer.Serialize(catFood));
                     }
@@ -57,7 +61,7 @@ namespace Pet_Store_class_exercise
                     Console.WriteLine("Type name of product");
                     userInput = Console.ReadLine();
                     //return product asked for
-                    var result = productLogic.GetCatFoodByName(userInput);
+                    var result = productLogic.GetProductByName<CatFood>(userInput);
                     ///if null return error message, if product exists return product info
                     if (result == null)
                     {
@@ -65,7 +69,7 @@ namespace Pet_Store_class_exercise
                     }
                     else
                     {
-                        Console.WriteLine(JsonSerializer.Serialize(productLogic.GetCatFoodByName(userInput)));
+                        Console.WriteLine(JsonSerializer.Serialize(productLogic.GetProductByName<CatFood>(userInput)));
                     }
                 }
                 ///show all instock products
@@ -86,7 +90,7 @@ namespace Pet_Store_class_exercise
             return new ServiceCollection()
                   .AddTransient<IProductLogic, ProductLogic>()
                   .BuildServiceProvider();
-        }
+        } 
     }
 }
 

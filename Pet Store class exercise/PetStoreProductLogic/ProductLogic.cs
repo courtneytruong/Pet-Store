@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Pet_Store_class_exercise;
 using PetStoreUI;
 using PetStoreProducts;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System.Collections.Generic;
+using FluentValidation;
 
 
 
@@ -15,7 +19,7 @@ namespace PetStoreProductLogic
     {
         // creates dictionaries for products
         private List<Product> _products = new List<Product>();
-        private Dictionary<string, DogLeash> dogDictionary = new Dictionary<string, DogLeash>();
+        private Dictionary<string, DogLeash> _dogDictionary = new Dictionary<string, DogLeash>();
         private Dictionary<string, CatFood> _catDictionary = new Dictionary<string, CatFood>();
 
         public ProductLogic()
@@ -29,11 +33,19 @@ namespace PetStoreProductLogic
         {
             if (product is DogLeash)
             {
-                dogDictionary.Add(product.Name, product as DogLeash);
+                _dogDictionary.Add(product.Name, product as DogLeash);
             }
             if (product is CatFood)
             {
-                _catDictionary.Add(product.Name, product as CatFood);
+                var validator = new CatFoodValidator();
+                if (validator.Validate(product as CatFood).IsValid)
+                {
+                    _catDictionary.Add(product.Name, product as CatFood);
+                }
+                else
+                {
+                    throw new ValidationException("The cat food product isn't valid");
+                }
             }
             _products.Add(product);
 
@@ -42,12 +54,23 @@ namespace PetStoreProductLogic
         {
             return _products;
         }
-        public CatFood GetCatFoodByName(string name) // search for catfood by name
+        public T GetProductByName<T>(string name) where T : Product
         {
-            try
+              try
             {
-                return _catDictionary[name];
-            } 
+                if (typeof(T) == typeof(DogLeash))
+                {
+                    return _dogDictionary[name] as T;
+                }
+                else if (typeof(T) == typeof(CatFood))
+                {
+                    return _catDictionary[name] as T;
+                }
+                else
+                {
+                    return null;
+                }
+            }
             catch (Exception)
             {
                 return null;
