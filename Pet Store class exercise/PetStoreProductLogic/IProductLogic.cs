@@ -1,27 +1,23 @@
 ﻿using System;
-using PetStoreProductLogic;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Pet_Store_class_exercise;
 using PetStoreProducts;
+using PetStore.Data;
 
 
-namespace PetStoreProductLogic
+namespace PetStoreProductLogic;
+
+public interface IProductLogic
 {
-    public interface IProductLogic
-    {
-        public void AddProduct(Product product); //add products to dictionary
+    public void AddProduct(ProductEntity product); //add products to dictionary
 
-        public List<Product> GetAllProducts(); //retrieves products entered by user
+    public List<ProductEntity> GetAllProducts(); //retrieves products entered by user
 
-        public T GetProductByName<T>(string name) where T : Product; // search for catfood by name
+    public ProductEntity GetProductByID(int productID); // search for catfood by name
 
-        public List<Product> GetOnlyInStockProducts(); //returns instock products
-
-        public decimal GetTotalPriceOfInventory();
-    }
 }
 
 

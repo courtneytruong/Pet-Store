@@ -7,15 +7,14 @@ using Pet_Store_class_exercise;
 using PetStoreProducts;
 
 
-namespace PetStoreUI
+namespace PetStoreUI;
+
+public interface IMenuLogic
 {
-    public interface IMenuLogic
-    {
-        public void WriteStartMenu(){ }
+    public void WriteStartMenu() { }
 
-        public void WriteConfirmMenu() { }
+    public void WriteConfirmMenu() { }
 
-        public static void ConfirmProductType() { }
+    public static void ConfirmProductType() { }
 
-    }
 }
