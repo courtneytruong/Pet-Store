@@ -16,7 +16,8 @@ public class MenuLogic : IMenuLogic
         Console.WriteLine("Welcome! To continue type the number that corresponds with the menu item of your choice:");
         Console.WriteLine("1. Add Product");
         Console.WriteLine("2. Search for Product by ID");
-        Console.WriteLine("3. Show all instock Products");
+        Console.WriteLine("3. Create Order");
+        Console.WriteLine("4. View an Order");
         Console.WriteLine("Type 'exit' to quit");
     }
 
@@ -25,7 +26,8 @@ public class MenuLogic : IMenuLogic
         Console.WriteLine("Confirm your choice from the menu below:");
         Console.WriteLine("1. Add Product");
         Console.WriteLine("2. Search for Product by ID");
-        Console.WriteLine("3. Show all instock Products");
+        Console.WriteLine("3. Create Order");
+        Console.WriteLine("4. View an Order");
         Console.WriteLine("Type 'exit' to quit");
     }
 

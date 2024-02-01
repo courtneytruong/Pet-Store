@@ -17,10 +17,12 @@ public class ProductLogic : IProductLogic
 {
 
     private readonly IProductRepository _productRepository;
+    private readonly IOrderRepository _orderRepository;
 
-    public ProductLogic(IProductRepository productRepository)
+    public ProductLogic(IProductRepository productRepository, IOrderRepository orderRepository)
     {
         _productRepository = productRepository;
+        _orderRepository = orderRepository;
     }
     public void AddProduct(ProductEntity product) //add products to dictionary
     {
@@ -34,4 +36,20 @@ public class ProductLogic : IProductLogic
     {
         return _productRepository.GetProductByID(productID);
     }
+
+    public void AddOrder(OrderEntity order) 
+    { 
+        _orderRepository.CreateOrder(order);
+    }
+
+    public List<OrderEntity> GetAllOrders()
+    {
+        return _orderRepository.GetAllOrders();
+    }
+
+    public OrderEntity GetOrderByID(int orderID)
+    {
+        return _orderRepository.GetOrderByID(orderID);
+    }
+
 }

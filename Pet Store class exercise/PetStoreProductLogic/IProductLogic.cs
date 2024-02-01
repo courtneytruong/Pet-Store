@@ -16,7 +16,13 @@ public interface IProductLogic
 
     public List<ProductEntity> GetAllProducts(); //retrieves products entered by user
 
-    public ProductEntity GetProductByID(int productID); // search for catfood by name
+    public ProductEntity GetProductByID(int productID); // search for product by ID
+
+    public void AddOrder(OrderEntity order);
+
+    public List<OrderEntity> GetAllOrders();
+
+    public OrderEntity GetOrderByID(int orderID);
 
 }
 

@@ -15,7 +15,7 @@ namespace PetStoreProducts
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public string Description { get; set; }
-        public string ProductID { get; set; }
+        public int ProductID { get; set; }
     }
 }
  

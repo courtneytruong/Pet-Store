@@ -35,7 +35,7 @@ public class Program
                 Console.WriteLine("Please add a Product in JSON format");
                 var userInputAsJson = Console.ReadLine();
                 var product = JsonSerializer.Deserialize<ProductEntity>(userInputAsJson);
-                //add product to list                      
+                //add product to database                      
                 productLogic?.AddProduct(product);
                 
                 Console.WriteLine("Product info added " + JsonSerializer.Serialize(product));
@@ -73,6 +73,34 @@ public class Program
                  Console.WriteLine(JsonSerializer.Serialize(productLogic.GetProductByID(productID)));
                 }
             }
+
+            if (userInput == "3")
+            {
+                Console.WriteLine("Add an Order in Json format");
+                    var userInputAsJson = Console.ReadLine();
+                var order = JsonSerializer.Deserialize<OrderEntity>(userInputAsJson);
+                //add order to database                     
+                productLogic?.AddOrder(order);
+                Console.WriteLine("Order info added " + JsonSerializer.Serialize(order));
+            }
+
+            if (userInput == "4")
+            {
+                Console.WriteLine("Type ID of order");
+                userInput = Console.ReadLine();
+                var orderID = int.Parse(Console.ReadLine());
+                //return product asked for
+                var result = productLogic?.GetOrderByID(orderID);
+                ///if null return error message, if product exists return product info
+                if (result == null)
+                {
+                    Console.WriteLine("Order not Found");
+                }
+                else
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(productLogic.GetOrderByID(orderID)));
+                }
+            }
             
         }
 
@@ -82,6 +110,7 @@ public class Program
         return new ServiceCollection()
               .AddTransient<IProductLogic, ProductLogic>()
               .AddTransient<IProductRepository, ProductRepository>()
+              .AddTransient<IOrderRepository, OrderRepository>()
               .AddDbContext<ProductContext>()
               .BuildServiceProvider();
     } 
